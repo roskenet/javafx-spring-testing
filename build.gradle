@@ -58,6 +58,8 @@ test {
     }
 }
 
+test.outputs.upToDateWhen { false }
+
 dependencies {
     compile(	
     			'org.springframework.boot:spring-boot-starter:1.5.6.RELEASE',
