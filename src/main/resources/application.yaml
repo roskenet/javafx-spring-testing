@@ -1,0 +1,15 @@
+spring:
+    jmx: 
+        enabled: false
+proxy:
+    port: 
+    host: 
+api:
+    key:
+javafx:
+    title: Newscenter
+    stage:
+        resizable: false
+    appicons:
+        - /icon.png
+    

@@ -1,0 +1,72 @@
+import org.gradle.plugins.ide.eclipse.model.AccessRule
+
+buildscript {
+    dependencies {
+		classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+    }
+    
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'javafx-gradle-plugin'
+apply plugin: 'idea'
+
+
+jfx {
+    mainClass = 'com.github.deen13.Main'
+    
+    vendor = 'Dennis Dierkes'
+}
+
+group = 'com.github.deen13'
+version = '0.0.1'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+eclipse {
+    classpath {
+        file {
+            whenMerged {
+                def jre = entries.find { it.path.contains 'org.eclipse.jdt.launching.JRE_CONTAINER' }
+                jre.accessRules.add(new AccessRule('0', 'com/**'))
+                jre.accessRules.add(new AccessRule('0', 'sun/**'))
+            }
+        }
+    }
+}
+
+dependencies {
+    compile(	
+    			'org.springframework.boot:spring-boot-starter:1.5.6.RELEASE',
+    			'de.roskenet:springboot-javafx-support:1.4.0',
+    			'org.controlsfx:controlsfx:8.40.12',
+    			'org.springframework:spring-web:5.0.0.RELEASE',
+                'com.fasterxml.jackson.core:jackson-databind:2.9.1',
+                'org.apache.httpcomponents:httpclient:4.5.3',
+                'com.jfoenix:jfoenix:1.9.0'
+    )
+    
+    testCompile(
+    			'de.roskenet:springboot-javafx-test:0.0.4',
+    			'org.mockito:mockito-all:2.0.2-beta', 
+    			'org.springframework:spring-context:5.0.0.RELEASE',
+    			'org.testfx:testfx-legacy:4.0.8-alpha'
+    )
+}
