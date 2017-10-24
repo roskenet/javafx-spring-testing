@@ -16,7 +16,7 @@ apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'javafx-gradle-plugin'
 apply plugin: 'idea'
-
+apply plugin: 'jacoco'
 
 jfx {
     mainClass = 'com.github.deen13.Main'
@@ -82,3 +82,12 @@ dependencies {
     			'org.testfx:testfx-legacy:4.0.8-alpha'
     )
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+check.dependsOn jacocoTestReport
