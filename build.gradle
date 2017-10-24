@@ -60,6 +60,10 @@ test {
 
 test.outputs.upToDateWhen { false }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
 dependencies {
     compile(	
     			'org.springframework.boot:spring-boot-starter:1.5.6.RELEASE',
